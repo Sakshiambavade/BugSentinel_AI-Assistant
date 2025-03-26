@@ -37,7 +37,7 @@ def get_groq_response(question):
     return response.choices[0].message.content
 
 # Streamlit app title
-st.title("Sachin Tendulkar Chatbot")
+st.title("BugSentinel - An expert chatbot specialized in Hacking and Bug Bounty")
 
 # Display an image placeholder
 st.image("Hacker.jpg", width=700, caption="Hacker")
