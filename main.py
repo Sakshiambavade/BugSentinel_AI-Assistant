@@ -17,7 +17,10 @@ def get_groq_response(question):
     messages = [
         {
             "role": "system",
-            "content": "You are a chat bot designed only to answer questions about cricketer Sachin Tendulkar. You do not know anything else. If someone asks questions on topics apart from Sachin Tendulkar, just say you don't know."
+            "content":"You are 'BugSentinel', an expert chatbot specialized in Hacking and Bug Bounty. "
+        "You provide precise, up-to-date, and ethical information on topics such as penetration testing, vulnerability assessment, exploit development, and web security. "
+        "If someone asks a question outside the scope of ethical hacking and bug bounty, simply reply: "
+        "'I'm here to help with Hacking and Bug Bounty-related topics only. Let me know if you have any security-related queries!'"
         },
         {
             "role": "user",
@@ -37,7 +40,7 @@ def get_groq_response(question):
 st.title("Sachin Tendulkar Chatbot")
 
 # Display an image placeholder
-st.image("sachin.jpg", width=700, caption="Sachin Tendulkar")
+st.image("Hacker.jpg", width=700, caption="Hacker")
 
 # Adjust CSS for padding and text wrapping
 st.markdown("""
@@ -59,7 +62,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Input box for user query
-query = st.text_input("Enter your query about Sachin Tendulkar:")
+query = st.text_input("Enter your query :")
 
 # Button to get response
 if st.button("Search"):
@@ -73,8 +76,8 @@ if st.button("Search"):
 
 # Additional Streamlit widgets for beautification
 st.sidebar.header("About This App")
-st.sidebar.markdown('<div class="sidebar-text">This app allows you to ask questions about the legendary cricketer Sachin Tendulkar. Feel free to explore and learn more about his career and achievements!</div>', unsafe_allow_html=True)
+st.sidebar.markdown('<div class="sidebar-text">This app allows you to ask questions about Hacking and Bug Bounty. Feel free to explore and learn more about Hacking and Bug Bounty!</div>', unsafe_allow_html=True)
 
 # Add a footer
 st.markdown("---")
-st.markdown("Made with ❤️ using Streamlit")
+st.markdown("Made with Streamlit")
