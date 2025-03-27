@@ -9,7 +9,7 @@ BugSentinel is an AI-powered chatbot designed to assist security researchers, et
 - 📝 **Bug Bounty Guidance**: Learn how to identify and report security vulnerabilities.
 - 🎨 **User-Friendly Interface**: Powered by Streamlit for a smooth experience.
 
-![Website Preview](bugsentinelai-assistant.png)
+![Website Preview](bugsentinelai.png)
 
 ## Live Demo
 👉 [Try it here]([https://your-deployed-app-link.com](https://bugsentinelai-assistant-a6qpdea6szu6ufclcmt8hu.streamlit.app/))
