@@ -13,14 +13,16 @@ GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 client = Groq(api_key=GROQ_API_KEY)
 MODEL = 'llama3-70b-8192'
 
+# Function to get response
 def get_groq_response(question):
     messages = [
         {
             "role": "system",
-            "content":"You are 'BugSentinel', an expert chatbot specialized in Hacking and Bug Bounty. "
-        "You provide precise, up-to-date, and ethical information on topics such as penetration testing, vulnerability assessment, exploit development, and web security. "
-        "If someone asks a question outside the scope of ethical hacking and bug bounty, simply reply: "
-        "'I'm here to help with Hacking and Bug Bounty-related topics only. Let me know if you have any security-related queries!'"
+            "content": "You are 'BugSentinel', an expert chatbot specialized in Hacking and Bug Bounty. "
+                       "You provide precise, up-to-date, and ethical information on topics such as penetration testing, "
+                       "vulnerability assessment, exploit development, and web security. "
+                       "If someone asks a question outside the scope of ethical hacking and bug bounty, simply reply: "
+                       "'I'm here to help with Hacking and Bug Bounty-related topics only. Let me know if you have any security-related queries!'"
         },
         {
             "role": "user",
@@ -36,48 +38,94 @@ def get_groq_response(question):
 
     return response.choices[0].message.content
 
-# Streamlit app title
-st.title("BugSentinel - An expert chatbot specialized in Hacking and Bug Bounty")
+# Initialize chat history
+if "conversation" not in st.session_state:
+    st.session_state.conversation = []
 
-# Display an image placeholder
-st.image("Hacker.jpg", width=700, caption="Hacker")
+# App Title
+st.title("🔍 BugSentinel - Hacking & Bug Bounty Assistant")
 
-# Adjust CSS for padding and text wrapping
+# Banner Image
+st.image("image copy.png", width=700, caption="Hacking & Cybersecurity")
+
+# CSS for Styling Chat
 st.markdown("""
 <style>
-.block-container {
-    padding-top: 3rem;  /* Adjust this value as needed */
-    padding-bottom: 1rem; /* Ensure bottom content is visible */
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-.css-1r6slb0 {
-    white-space: normal !important;
-}
-.sidebar-text {
-    white-space: normal !important;
-    word-wrap: break-word;
-}
+    .chat-container {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #1E1E1E;
+        color: white;
+    }
+    .message {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .user-message {
+        background-color: #0078ff;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 75%;
+        text-align: right;
+    }
+    .ai-message {
+        background-color: #444;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 75%;
+        text-align: left;
+    }
+    .user-container {
+        justify-content: flex-end;
+        text-align: right;
+    }
+    .ai-container {
+        justify-content: flex-start;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-# Input box for user query
-query = st.text_input("Enter your query :")
+# Chat History Section
+st.markdown("## Chat History")
+chat_placeholder = st.container()
 
-# Button to get response
+with chat_placeholder:
+    for message in st.session_state.conversation:
+        if message["role"] == "user":
+            st.markdown(f"""
+            <div class='message user-container'>
+                <div class='user-message'>{message['content']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+            <div class='message ai-container'>
+                <div class='ai-message'>{message['content']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+# User Input
+st.markdown("## Ask BugSentinel")
+query = st.text_input("Enter your query:")
+
 if st.button("Search"):
     if query:
-        # Get the response from the Groq model
         response = get_groq_response(query)
-        # Display the response
-        st.write("Response:", response)
-    else:
-        st.write("Please enter a query.")
+        st.session_state.conversation.append({"role": "user", "content": query})
+        st.session_state.conversation.append({"role": "assistant", "content": response})
+        st.rerun()
 
-# Additional Streamlit widgets for beautification
-st.sidebar.header("About This App")
-st.sidebar.markdown('<div class="sidebar-text">This app allows you to ask questions about Hacking and Bug Bounty. Feel free to explore and learn more about Hacking and Bug Bounty!</div>', unsafe_allow_html=True)
+# Sidebar Information
+st.sidebar.header("📌 About This App")
+st.sidebar.markdown("BugSentinel is an AI-powered chatbot that specializes in Hacking and Bug Bounty. "
+                    "It provides guidance on ethical hacking, penetration testing, web security, and more.")
 
-# Add a footer
+# Footer
 st.markdown("---")
-st.markdown("Made with Streamlit")
+st.markdown("🚀 Developed by Sakshi Ambavade")
