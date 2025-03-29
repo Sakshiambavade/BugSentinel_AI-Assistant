@@ -12,5 +12,5 @@ BugSentinel is an AI-powered chatbot designed to assist security researchers, et
 ![Website Preview](bugsentinelai.png)
 
 ## Live Demo
-👉 [Try it here]([https://your-deployed-app-link.com](https://bugsentinelai-assistant-a6qpdea6szu6ufclcmt8hu.streamlit.app/))
+👉 [Try it here](https://bugsentinelai-assistant-a6qpdea6szu6ufclcmt8hu.streamlit.app/)
 
